@@ -17,12 +17,32 @@ plot <- ggplot(df, aes(x = as.Date(data), y = zamkniecie, group = 1)) +
   geom_line(color = "red") +
   labs(x = "data", y = "Cena podczas zamknięcia")
 
-ggsave("cena_podczas_zamkniecia.jpg", plot = plot, width = 12, height = 9, units = "cm", dpi = 480)
+ggsave(
+  "cena_podczas_zamkniecia.jpg",
+  plot = plot,
+  width = 12,
+  height = 9,
+  units = "cm",
+  dpi = 480
+)
 
-# hist(Zamkniecie, prob = TRUE, xlab = "Zamknięcie", ylab = "Gęstość")
 hist_df <- data.frame(zamkniecie = Zamkniecie)
-hist <- ggplot(hist_df, aes(x=Zamkniecie)) + geom_histogram(binwidth=0.1, color="black", fill="white")
-ggsave("histogram.jpg", plot = hist, width = 12, height = 9, units = "cm", dpi = 480)
+hist <- ggplot(
+  hist_df,
+  aes(x = Zamkniecie)
+) + geom_histogram(
+  binwidth = 0.1,
+  color = "black",
+  fill = "white"
+)
+ggsave(
+  "histogram.jpg",
+  plot = hist,
+  width = 12,
+  height = 9,
+  units = "cm",
+  dpi = 480
+)
 
 # Zadanie 2
 ccc_mean     <- mean(Zamkniecie)
@@ -58,14 +78,10 @@ cdfcomp(list(decay_norm, decay_lnorm, decay_gamma), legendtext = legendary)
 ppcomp(list(decay_norm, decay_lnorm, decay_gamma), legendtext = legendary)
 dev.off()
 
-# na podstawie tych 4 wykresów można wywnioskować że wykres lnorm jest najlepiej opisuje kursy zamknięcia, ale aby to dokładnie stwierdzić trzeba wykonać analizę statystyk , ale aby to dokładnie stwierdzić trzeba wykonać analizę statystyk KS, CM i AD oraz kryteriów informacyjnych AIC i BIC
-
 gofstat(
         list(decay_norm, decay_lnorm, decay_gamma),
         fitnames = legendary
 )
-
-# analiza statystyk według tych 3 ziomów, moich ziomów oraz kryteriów AIC i BIC potwierdza to założenie # ładnie napisać w latexxieiee
 
 # Zadanie 5
 N <- 10000
